@@ -1,0 +1,49 @@
+﻿@model courseapp.ViewMobel.CategoryModelView
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>CategoryModelView</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class="form-control" type="text"   maxlength="50" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="text-muted" asp-for="ParentName">Category</label> <br />
+
+                <select class="form-control" asp-for="ParentName" asp-items="@(new SelectList(Model.Maincategory,"ParentName","ParentName"))">
+                   
+                </select>
+                <span asp-validation-for="ParentName" class="text-danger"> </span>
+
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary mt-4"> <i class="bi bi-check "></i> Save</button>
+            </div>
+            @if( ViewBag.Massage != null){
+                <div class="alret alert-danger">
+                    @ViewBag.Massage
+                </div>
+            }
+           
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

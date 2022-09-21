@@ -1,0 +1,48 @@
+﻿@model courseapp.ViewMobel.CategoryModelView
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>CategoryModelView</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="text-muted" asp-for="ParentName">Category</label> <br />
+
+                <select class="form-control" asp-for="ParentName" asp-items="@(new SelectList(Model.Maincategory,"ParentName","ParentName"))">
+                    <option></option>
+                </select>
+                <span asp-validation-for="ParentName" class="text-danger"> </span>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            @if (ViewBag.Massage != null)
+            {
+                var cssclass = ViewBag.succes == true ?"alert-success" :"alert-danger";
+                <div class= "alert @cssclass">
+                    @ViewBag.Massage
+                    </div>
+            }
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
